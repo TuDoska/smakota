@@ -129,7 +129,10 @@ function search() {
     }
 
     const found = recipes.filter(function (recipe) {
-        return recipe.name.toLowerCase().includes(query);
+        const inName = recipe.name.toLowerCase().includes(query);
+        const inCategory = recipe.category.toLowerCase().includes(query);
+
+        return inName || inCategory;
     });
 
     renderRecipes(found);
