@@ -478,7 +478,73 @@ a{
     color: #7D7A75;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+.add-recipe {
+    padding: 0 0 64px;
+}
+
+.add-recipe__title {
+    margin-bottom: 32px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.add-recipe__form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.add-recipe__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.add-recipe__field input,
+.add-recipe__field select {
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #E0DDD8;
+    border-radius: 8px;
+}
+
+.add-recipe__field input:focus,
+.add-recipe__field select:focus {
+    border-color: #E4572E;
+}
+
+.add-recipe__button {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #E4572E;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.add-recipe__button:hover {
+    background-color: #C94420;
+}
+
+
 @media (max-width: 768px){
+
+
+        .add-recipe__form {
+        grid-template-columns: 1fr;
+    }
+
 
     .hero__title{
         font-size: 36px;

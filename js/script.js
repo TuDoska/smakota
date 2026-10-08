@@ -54,6 +54,17 @@ const recipes = [
     },
 ];
 
+let savedRecipes = [];
+
+try {
+    savedRecipes = JSON.parse(localStorage.getItem('userRecipes')) || [];
+} catch (error) {
+    savedRecipes = [];
+}
+
+recipes.unshift(...savedRecipes);
+
+
 const randomButton = document.querySelector('.banner__button');
 const bannerText = document.querySelector('.banner__subtitle');
 
@@ -74,16 +85,23 @@ randomButton.addEventListener('click', function (event) {
 });
 
 
-
-
-
-
 const popularList = document.querySelector('.popular__list');
 const popularTitle = document.querySelector('.popular__title');
-const defaultTitle = 'Популярні рецепти';
 const popularLink = document.querySelector('.popular__link');
+const defaultTitle = 'Популярні рецепти';
 const linkDefaultText = 'Дивитися всі →';
 let showingAll = false;
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function resetLink() {
+    showingAll = false;
+    popularLink.textContent = linkDefaultText;
+}
 
 function renderRecipes(list) {
     if (list.length === 0) {
@@ -103,11 +121,11 @@ function renderRecipes(list) {
                 <article class="recipe-card">
                     ${imageHtml}
                     <div class="recipe-card__body">
-                        <span class="recipe-card__category">${recipe.category}</span>
-                        <h3 class="recipe-card__title">${recipe.name}</h3>
+                        <span class="recipe-card__category">${escapeHtml(recipe.category)}</span>
+                        <h3 class="recipe-card__title">${escapeHtml(recipe.name)}</h3>
                         <div class="recipe-card__meta">
                             <span>⏱ ${recipe.time} хв</span>
-                            <span>👨‍🍳 ${recipe.level}</span>
+                            <span>👨‍🍳 ${escapeHtml(recipe.level)}</span>
                             <span>⭐ ${recipe.rating}</span>
                         </div>
                     </div>
@@ -127,8 +145,8 @@ const searchForm = document.querySelector('.hero__form');
 
 function search() {
     const query = searchInput.value.trim().toLowerCase();
-    showingAll = false;
-    popularLink.textContent = linkDefaultText;
+    resetLink();
+
     if (query === '') {
         popularTitle.textContent = defaultTitle;
         renderRecipes(recipes.slice(0, 3));
@@ -143,8 +161,6 @@ function search() {
     });
 
     popularTitle.textContent = 'Результати пошуку';
-    showingAll = false;
-    popularLink.textContent = linkDefaultText;
     renderRecipes(found);
 }
 
@@ -155,7 +171,6 @@ searchForm.addEventListener('submit', function (event) {
     search();
     document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
 });
-
 
 
 const categoryCards = document.querySelectorAll('.category-card');
@@ -171,14 +186,12 @@ categoryCards.forEach(function (card) {
         });
 
         searchInput.value = '';
-        showingAll = false;
-        popularLink.textContent = linkDefaultText;
+        resetLink();
         popularTitle.textContent = categoryName;
         renderRecipes(found);
         document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
     });
 });
-
 
 
 popularLink.addEventListener('click', function (event) {
@@ -198,7 +211,33 @@ popularLink.addEventListener('click', function (event) {
     showingAll = !showingAll;
 });
 
-function resetLink() {
-    showingAll = false;
-    popularLink.textContent = linkDefaultText;
-}
+
+const recipeForm = document.querySelector('#recipe-form');
+
+recipeForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(recipeForm);
+
+    const newRecipe = {
+        category: formData.get('category'),
+        name: formData.get('name').trim(),
+        time: Number(formData.get('time')),
+        level: formData.get('level'),
+        rating: '–',
+        image: '',
+        alt: ''
+    };
+
+    savedRecipes.unshift(newRecipe);
+    localStorage.setItem('userRecipes', JSON.stringify(savedRecipes));
+    recipes.unshift(newRecipe);
+
+    recipeForm.reset();
+
+    searchInput.value = '';
+    resetLink();
+    popularTitle.textContent = defaultTitle;
+    renderRecipes(recipes.slice(0, 3));
+    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+});
