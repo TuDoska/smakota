@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смакота — рецепти на щодень</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body>
+    <header class="header">
+        <div class="container header__inner">
+
+            <a href="#" class="header__logo">Смакота<span class="header__logo-dot">.</span></a>
+
+            <nav class="header__menu">
+                <ul class="header__list">
+                    <li> <a href="#" class="header__link">Рецепти</a></li>
+                    <li> <a href="#" class="header__link">Категорії</a></li>
+                    <li> <a href="#" class="header__link">Кухні світу</a></li>
+                    <li> <a href="#" class="header__link">Про нас</a></li>
+                </ul>
+            </nav>
+
+            <a href="#" class="header__button">Додати рецепт</a>
+
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <p class="hero__badge">Понад 5 000 рецептів</p>
+                    <h1 class="hero__title"> Готуйте <span class="hero__title-accent">смачно</span> щодня</h1>
+                    <p class="hero__subtitle">Перевірені рецепти з покроковим фото: від домашнього борщу до піци та
+                        китайських страв.</p>
+                    <search>
+                        <form class="hero__form" action="#" method="get">
+                            <input class="hero__search" type="search" name="q" placeholder="Пошук рецепта..." required>
+                            <button class="hero__button" type="submit">Знайти</button>
+                        </form>
+                    </search>
+                    <div class="hero__popular">
+                        <span class="hero__text-tags">Популярне:</span>
+                        <ul class="hero__tags">
+                            <li> <a class="hero__tag" href="#">Борщ</a> </li>
+                            <li> <a class="hero__tag" href="#">Піца</a></li>
+                            <li> <a class="hero__tag" href="#">Сирники</a></li>
+                            <li> <a class="hero__tag" href="#">Вареники</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <img class="hero__image" src="img/borscht.jpg" alt="на фото: миска борщу, сметана, скибка хліба.">
+            </div>
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+        <section class="categories">
+            <div class="container">
+                <div class="categories__header">
+                    <h2 class="categories__title">Категорії</h2>
+                    <a class="categories__link" href="#">Усі категорії →</a>
+                </div>
+
+                <ul class="categories__list">
+
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍲</span>
+                            <span class="category-card__name">Перші страви</span>
+                            <span class="category-card__count">312 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category-card">
+                            <span class="category-card__icon">🍛</span>
+                            <span class="category-card__name">Другі страви</span>
+                            <span class="category-card__count">540 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🥗</span>
+                            <span class="category-card__name">Салати</span>
+                            <span class="category-card__count">275 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🥐</span>
+                            <span class="category-card__name">Випічка</span>
+                            <span class="category-card__count">428 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍕</span>
+                            <span class="category-card__name">Піца</span>
+                            <span class="category-card__count">96 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍰</span>
+                            <span class="category-card__name">Десерти</span>
+                            <span class="category-card__count">350 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🥟</span>
+                            <span class="category-card__name">Китайська кухня</span>
+                            <span class="category-card__count">140 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍝</span>
+                            <span class="category-card__name">Італійська кухня</span>
+                            <span class="category-card__count">185 рецептів</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍽️</span>
+                            <span class="category-card__name">Ресторанні страви</span>
+                            <span class="category-card__count">120 рецептів</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍳</span>
+                            <span class="category-card__name">Сніданки</span>
+                            <span class="category-card__count">210 рецептів</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🥦</span>
+                            <span class="category-card__name">Вегетаріанські</span>
+                            <span class="category-card__count">164 рецепти</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="category-card" href="#">
+                            <span class="category-card__icon">🍹</span>
+                            <span class="category-card__name">Напої</span>
+                            <span class="category-card__count">88 рецептів</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+
+
+        <section class="popular">
+            <div class="container">
+                <div class="popular__header">
+                    <h2 class="popular__title">Популярні рецепти</h2>
+                    <a class="popular__link" href="#">Дивитися всі →</a>
+                </div>
+
+
+
+                <ul class="popular__list">
+                    <li>
+                        <article class="recipe-card">
+                            <img class="recipe-card__image" src="img/pizza.jpg" alt="картинка">
+                            <div class="recipe-card__body">
+                                <span class="recipe-card__category">Піца</span>
+                                <h3 class="recipe-card__title">Піца Маргарита як у Неаполі</h3>
+                                <div class="recipe-card__meta">
+                                    <span>⏱ 40 хв</span>
+                                    <span>👨‍🍳 Середньо</span>
+                                    <span>⭐ 4.9</span>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li>
+                        <article class="recipe-card">
+                            <img class="recipe-card__image" src="img/dumplings.jpg" alt="картинка">
+                            <div class="recipe-card__body">
+                                <span class="recipe-card__category">Китайська кухня</span>
+                                <h3 class="recipe-card__title">Дамплінги на пару зі свининою</h3>
+                                <div class="recipe-card__meta">
+                                    <span>⏱ 60 хв</span>
+                                    <span>👨‍🍳 Складно</span>
+                                    <span>⭐ 4.8</span>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="recipe-card">
+                            <img class="recipe-card__image" src="img/bakery.jpg" alt="картинка">
+                            <div class="recipe-card__body">
+                                <span class="recipe-card__category">Випічка</span>
+                                <h3 class="recipe-card__title">Булочки з корицею та глазур'ю</h3>
+                                <div class="recipe-card__meta">
+                                    <span>⏱ 90 хв</span>
+                                    <span>👨‍🍳 Легко</span>
+                                    <span>⭐ 4.7</span>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+
+        <section class="banner">
+            <div class="container">
+                <div class="banner__inner">
+                    <div class="banner__text">
+                        <h2 class="banner__title">Не знаєте, що приготувати?</h2>
+                        <p class="banner__subtitle">Ми підберемо випадковий рецепт саме для вас.</p>
+                    </div>
+                    <a href="#" class="banner__button">Випадковий рецепт</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+    <div class="container">
+
+        <div class="footer__top">
+
+            <div class="footer__brand">
+                <a href="#" class="footer__logo">Смакота<span class="footer__logo-dot">.</span></a>
+                <p class="footer__text">Тисячі перевірених рецептів для всієї родини.</p>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__title">Категорії</h3>
+                <ul class="footer__list">
+                    <li><a class="footer__link" href="#">Перші страви</a></li>
+                    <li><a class="footer__link" href="#">Випічка</a></li>
+                    <li><a class="footer__link" href="#">Піца</a></li>
+                    <li><a class="footer__link" href="#">Десерти</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__title">Інформація</h3>
+                <ul class="footer__list">
+                    <li><a class="footer__link" href="#">Про нас</a></li>
+                    <li><a class="footer__link" href="#">Контакти</a></li>
+                    <li><a class="footer__link" href="#">Політика</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__title">Соцмережі</h3>
+                <ul class="footer__list">
+                    <li><a class="footer__link" href="#">Instagram</a></li>
+                    <li><a class="footer__link" href="#">Telegram</a></li>
+                    <li><a class="footer__link" href="#">YouTube</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer__bottom">
+            <p class="footer__copyright">© 2026 Смакота. Усі права захищено.</p>
+        </div>
+
+    </div>
+</footer>
+</body>

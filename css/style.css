@@ -1,0 +1,482 @@
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+*,*:before,*:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+
+nav,footer,header,aside{display: block;}
+
+html,body{
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family:inherit;}
+
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a, a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+/*--------------------*/
+
+body{
+     font-family: 'Noto Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2C2C2B;
+}
+
+a{
+      color: inherit;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid #EBEBEB;
+}
+.container {
+     max-width: 1200px;
+     padding: 0 24px;
+     margin: 0 auto;
+   
+}
+
+.header__inner {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__logo {
+   
+    font-size: 24px;
+    font-weight: 700;
+    
+
+}
+.header__logo-dot {
+    color: #C94420;
+}
+.header__menu {
+    
+}
+.header__list {
+    display: flex;
+    gap: 32px;
+}
+
+.header__list{}
+
+.header__link:hover{
+     color: #C94420;
+}
+.header__button {
+    color: #fff;
+    background-color: #E4572E;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600
+}
+
+.header__button:hover{
+    transition: 0.2;
+    background-color: #C94420;
+}
+
+
+
+
+
+.main {}
+.hero {
+    padding: 64px 0;
+}
+.hero__inner {
+        display: flex;
+        
+        align-items: center;
+        gap: 64px;
+        
+        
+}
+.hero__content {
+    flex: 1;
+    min-width: 0;
+    
+}
+.hero__badge {
+    display: inline-block;
+    
+    color: #E4572E;
+    background-color: rgba(228, 87, 46, 0.12);
+    border-radius: 8px;
+    font-weight: 500;
+     padding: 6px 12px;
+     margin-bottom: 20px;
+     font-size: 14px;
+
+    
+  
+    
+}
+.hero__title {
+     margin-bottom: 20px;
+    font-size: 56px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+.hero__title-accent {
+    color: #E4572E;
+}
+.hero__subtitle {
+    color: #7D7A75;
+    font-size: 18px;
+    margin-bottom: 32px;
+}
+
+.hero__form {
+    display: flex;
+    gap: 8px;
+    max-width: 480px;
+    margin-bottom: 24px;
+}
+
+
+.hero__search {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #E0DDD8;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.hero__button {
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    background-color: #E4572E;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+.hero__popular {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.hero__text-tags {
+    font-size: 14px;
+    color: #7D7A75;
+}
+.hero__tags {
+    display: flex;
+    gap: 8px;
+}
+
+.hero__tag{
+    
+    display: inline-block;
+     padding: 6px 14px;
+    font-size: 14px;
+     border: 1px solid #E0DDD8;
+      border-radius: 8px;
+}
+
+.hero__tag:hover {
+    color: #E4572E;
+    border-color: #E4572E;
+}
+
+.hero__image {
+    height: 400px;
+    min-width: 0;
+    border-radius: 16px; 
+    object-fit: cover;
+    width: 100%;
+    flex: 1;
+}
+
+
+
+
+
+
+
+
+.categories {
+    background-color: #FAF6F1;
+    padding: 64px 0;
+}
+                                        .categories__header,
+                                        .popular__header{
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            margin-bottom: 32px;
+                                        }
+                                    .categories__title,
+                                    .popular__title {
+                                        font-size: 32px;
+                                        font-weight: 700;
+                                        
+                                    }
+.categories__link {
+    color: #E4572E;
+    font-weight: 500;
+} /* саме з цього я і буду прописувати адаптацію*/         .categories__list {
+                                                            display: grid;
+                                                            grid-template-columns: repeat(6, 1fr);
+                                                            gap: 16px;
+                                                        }
+.category-card {
+    background-color: #fff;
+    border: 1px solid #EBE7E0;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.category-card__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    border-radius: 50%;
+    background-color: #FAF6F1;
+     width: 64px;
+    height: 64px;
+}
+
+.category-card__name {
+    font-size: 16px;
+    font-weight: 600;
+}
+.category-card__count {
+    font-size: 14px;
+    color: #7D7A75;
+}
+
+
+
+
+
+.popular {
+    padding: 64px 0;
+}
+
+
+.popular__link {
+    color: #E4572E;
+    font-weight: 500;
+}
+.popular__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+     height: 100%;
+    background-color: #fff;
+    border: 1px solid #EBE7E0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.recipe-card__image {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    display: block;
+}
+.recipe-card__body {
+    display: flex;
+    flex-direction: column;
+     flex: 1;
+    padding: 24px;
+}
+.recipe-card__category {
+    font-size: 13px;
+    color:#E4572E;
+    font-weight: 600;
+}
+.recipe-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 8px 0 24px;
+}
+.recipe-card__meta {
+    display: flex;
+    gap: 16px;
+    border-top: 1px solid #EBE7E0;
+    padding-top: 16px;
+    color:#7D7A75;
+    font-size: 14px;
+    margin-top: auto;
+}
+.banner {
+    padding: 0 0 64px;
+}
+.banner__inner {
+    background-color: #FCEAE4;
+    border-radius: 16px;
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner__text {}
+.banner__title {
+    font-size: 32px;
+    font-weight: 700;
+}
+.banner__subtitle {
+    margin-top: 8px;
+    color: #7D7A75;
+}
+.banner__button {
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    background-color: #E4572E;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+
+
+
+
+.footer {
+    background-color: #1F1E1D;
+    color: #fff;
+    padding: 64px 0 32px;
+}
+.footer__top {
+    display: grid;
+   grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+}
+.footer__brand {}
+.footer__logo {
+    font-size: 24px;
+    font-weight: 700;
+}
+.footer__logo-dot {
+    color: #E4572E;
+}
+.footer__text {
+    margin-top: 10px;
+    color: #7D7A75;
+}
+.footer__col {}
+.footer__title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+.footer__list {
+    display: flex; 
+    flex-direction: column;
+    gap: 12px
+}
+.footer__link {
+    color: #B5B2AD;
+}
+
+.footer__link:hover {
+    color: #fff;
+}
+
+
+.footer__bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 48px;
+    padding-top: 24px;
+}
+.footer__copyright {
+    font-size: 14px;
+    color:#7D7A75;
+}
+
+
+
+/*Наш підхід називається desktop-first: спершу зроблено для великого екрана (це твій макет), потім max-width «стискає» під менші. Дві точки зміни:
+
+1024px: планшет  1!!!!!
+768px: телефон   !!!!!1
+
+Як перевіряти: у Chrome натисни F12, потім Ctrl+Shift+M (режим пристрою). Можна перетягувати межі сторінки й бачити, як вона змінюється, або обрати iPhone зі списку. */
+
+
+
+
+
+@media (max-width: 1024px) {
+    .hero-title{
+        font-size: 44px;
+    }
+
+    .hero__inner{
+        gap: 32px;
+    }
+
+    .categories__list{
+         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .popular__list{
+         grid-template-columns: repeat(2, 1fr);
+    }
+
+    
+}
+
+@media (max-width: 768px){
+     .header__menu {
+        display: none;
+    }
+
+     .categories__list{
+         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .popular__list{
+         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .banner__inner{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 32px 24px;
+    }
+
+    .footer__brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer__top {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
