@@ -76,27 +76,69 @@ randomButton.addEventListener('click', function (event) {
 
 
 
+
+
 const popularList = document.querySelector('.popular__list');
 
-let cardsHtml = '';
+function renderRecipes(list) {
+    if (list.length === 0) {
+        popularList.innerHTML = '<li class="popular__empty">Нічого не знайдено. Спробуйте інше слово.</li>';
+        return;
+    }
 
-recipes.slice(0, 3).forEach(function (recipe) {
-cardsHtml += `
+    let cardsHtml = '';
+
+    list.forEach(function (recipe) {
+        const imageHtml = recipe.image
+            ? `<img class="recipe-card__image" src="${recipe.image}" alt="${recipe.alt}">`
+            : `<div class="recipe-card__image recipe-card__image--placeholder">🍽️</div>`;
+
+        cardsHtml += `
             <li>
-            <article class="recipe-card">
-                <img class="recipe-card__image" src="${recipe.image}" alt="${recipe.alt}">
-                <div class="recipe-card__body">
-                    <span class="recipe-card__category">${recipe.category}</span>
-                    <h3 class="recipe-card__title">${recipe.name}</h3>
-                    <div class="recipe-card__meta">
-                        <span>⏱ ${recipe.time} хв</span>
-                        <span>👨‍🍳 ${recipe.level}</span>
-                        <span>⭐ ${recipe.rating}</span>
+                <article class="recipe-card">
+                    ${imageHtml}
+                    <div class="recipe-card__body">
+                        <span class="recipe-card__category">${recipe.category}</span>
+                        <h3 class="recipe-card__title">${recipe.name}</h3>
+                        <div class="recipe-card__meta">
+                            <span>⏱ ${recipe.time} хв</span>
+                            <span>👨‍🍳 ${recipe.level}</span>
+                            <span>⭐ ${recipe.rating}</span>
+                        </div>
                     </div>
-                </div>
-            </article>
-        </li>
-    `;
-});
+                </article>
+            </li>
+        `;
+    });
 
-popularList.innerHTML = cardsHtml;
+    popularList.innerHTML = cardsHtml;
+}
+
+renderRecipes(recipes.slice(0, 3));
+
+
+const searchInput = document.querySelector('.hero__search');
+const searchForm = document.querySelector('.hero__form');
+
+function search() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (query === '') {
+        renderRecipes(recipes.slice(0, 3));
+        return;
+    }
+
+    const found = recipes.filter(function (recipe) {
+        return recipe.name.toLowerCase().includes(query);
+    });
+
+    renderRecipes(found);
+}
+
+searchInput.addEventListener('input', search);
+
+searchForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    search();
+    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+});

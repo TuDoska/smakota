@@ -465,6 +465,19 @@ a{
     
 }
 
+.recipe-card__image--placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    background-color: #FAF6F1;
+}
+
+.popular__empty {
+    grid-column: 1 / -1;
+    color: #7D7A75;
+}
+
 @media (max-width: 768px){
 
     .hero__title{
