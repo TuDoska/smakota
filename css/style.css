@@ -435,12 +435,23 @@ a{
 
 
 @media (max-width: 1024px) {
-    .hero-title{
+    .hero__title{
         font-size: 44px;
     }
 
     .hero__inner{
         gap: 32px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero__content,
+    .hero__image {
+        flex: none;
+    }
+
+    .hero__image {
+        height: 260px;
     }
 
     .categories__list{
@@ -455,6 +466,10 @@ a{
 }
 
 @media (max-width: 768px){
+
+    .hero__title{
+        font-size: 36px;
+    }
      .header__menu {
         display: none;
     }
@@ -497,6 +512,7 @@ a{
 
     .header__list{
         flex-direction: column;
+        gap: 16px;
     }
 
      .categories__list{
@@ -513,6 +529,11 @@ a{
         gap: 24px;
         padding: 32px 24px;
       
+    }
+
+    .footer__top {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
     }
 
     .footer__brand {
