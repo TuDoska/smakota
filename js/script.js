@@ -79,6 +79,8 @@ randomButton.addEventListener('click', function (event) {
 
 
 const popularList = document.querySelector('.popular__list');
+const popularTitle = document.querySelector('.popular__title');
+const defaultTitle = 'Популярні рецепти';
 
 function renderRecipes(list) {
     if (list.length === 0) {
@@ -124,6 +126,7 @@ function search() {
     const query = searchInput.value.trim().toLowerCase();
 
     if (query === '') {
+        popularTitle.textContent = defaultTitle;
         renderRecipes(recipes.slice(0, 3));
         return;
     }
@@ -135,6 +138,7 @@ function search() {
         return inName || inCategory;
     });
 
+    popularTitle.textContent = 'Результати пошуку';
     renderRecipes(found);
 }
 
@@ -144,4 +148,25 @@ searchForm.addEventListener('submit', function (event) {
     event.preventDefault();
     search();
     document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+});
+
+
+
+const categoryCards = document.querySelectorAll('.category-card');
+
+categoryCards.forEach(function (card) {
+    card.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const categoryName = card.querySelector('.category-card__name').textContent;
+
+        const found = recipes.filter(function (recipe) {
+            return recipe.category === categoryName;
+        });
+
+        searchInput.value = '';
+        popularTitle.textContent = categoryName;
+        renderRecipes(found);
+        document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+    });
 });
