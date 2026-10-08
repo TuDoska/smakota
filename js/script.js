@@ -81,6 +81,9 @@ randomButton.addEventListener('click', function (event) {
 const popularList = document.querySelector('.popular__list');
 const popularTitle = document.querySelector('.popular__title');
 const defaultTitle = 'Популярні рецепти';
+const popularLink = document.querySelector('.popular__link');
+const linkDefaultText = 'Дивитися всі →';
+let showingAll = false;
 
 function renderRecipes(list) {
     if (list.length === 0) {
@@ -124,7 +127,8 @@ const searchForm = document.querySelector('.hero__form');
 
 function search() {
     const query = searchInput.value.trim().toLowerCase();
-
+    showingAll = false;
+    popularLink.textContent = linkDefaultText;
     if (query === '') {
         popularTitle.textContent = defaultTitle;
         renderRecipes(recipes.slice(0, 3));
@@ -139,6 +143,8 @@ function search() {
     });
 
     popularTitle.textContent = 'Результати пошуку';
+    showingAll = false;
+    popularLink.textContent = linkDefaultText;
     renderRecipes(found);
 }
 
@@ -165,8 +171,34 @@ categoryCards.forEach(function (card) {
         });
 
         searchInput.value = '';
+        showingAll = false;
+        popularLink.textContent = linkDefaultText;
         popularTitle.textContent = categoryName;
         renderRecipes(found);
         document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
     });
 });
+
+
+
+popularLink.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    searchInput.value = '';
+    popularTitle.textContent = defaultTitle;
+
+    if (showingAll) {
+        renderRecipes(recipes.slice(0, 3));
+        popularLink.textContent = linkDefaultText;
+    } else {
+        renderRecipes(recipes);
+        popularLink.textContent = 'Показати менше ←';
+    }
+
+    showingAll = !showingAll;
+});
+
+function resetLink() {
+    showingAll = false;
+    popularLink.textContent = linkDefaultText;
+}
