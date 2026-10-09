@@ -379,7 +379,21 @@ a{
 }
 
 
+.popular__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
 
+.popular__saved {
+    font-size: 16px;
+    font-weight: 500;
+    background: none;
+}
+
+.popular__saved:hover {
+    color: #E4572E;
+}
 
 
 .footer {

@@ -32,9 +32,9 @@ function resetLink() {
     popularLink.textContent = linkDefaultText;
 }
 
-function renderRecipes(list) {
+function renderRecipes(list, emptyText) {
     if (list.length === 0) {
-        popularList.innerHTML = '<li class="popular__empty">Нічого не знайдено. Спробуйте інше слово.</li>';
+        popularList.innerHTML = '<li class="popular__empty">' + (emptyText || 'Нічого не знайдено. Спробуйте інше слово.') + '</li>';
         return;
     }
 
@@ -180,3 +180,18 @@ recipeForm.addEventListener('submit', function (event) {
 });
 
 
+const savedButton = document.querySelector('#saved-button');
+
+savedButton.addEventListener('click', function () {
+    const favorites = getFavorites();
+
+    const found = recipes.filter(function (recipe) {
+        return favorites.includes(recipe.id);
+    });
+
+    searchInput.value = '';
+    resetLink();
+    popularTitle.textContent = 'Збережені рецепти';
+    renderRecipes(found, 'Ви ще нічого не зберегли. Відкрийте рецепт і натисніть «Зберегти».');
+    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+});
