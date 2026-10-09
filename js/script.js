@@ -1,70 +1,3 @@
-const burger = document.querySelector('.header__burger');
-const menu = document.querySelector('.header__menu');
-
-burger.addEventListener('click', function () {
-    menu.classList.toggle('header__menu--open');
-});
-
-
-const recipes = [
-    {
-        category: 'Піца',
-        name: 'Піца Маргарита як у Неаполі',
-        time: 40,
-        level: 'Середньо',
-        rating: 4.9,
-        image: 'img/pizza.jpg',
-        alt: "Піца Маргарита на дерев'яній дошці з базиліком"
-    },
-    {
-        category: 'Китайська кухня',
-        name: 'Дамплінги на пару зі свининою',
-        time: 60,
-        level: 'Складно',
-        rating: 4.8,
-        image: 'img/dumplings.jpg',
-        alt: 'Дамплінги в бамбуковій пароварці з соєвим соусом'
-    },
-    {
-        category: 'Випічка',
-        name: "Булочки з корицею та глазур'ю",
-        time: 90,
-        level: 'Легко',
-        rating: 4.7,
-        image: 'img/bakery.jpg',
-        alt: 'Булочки з корицею та круасани на деку'
-    },
-    {
-        category: 'Перші страви',
-        name: 'Український борщ',
-        time: 120,
-        level: 'Середньо',
-        rating: 4.8,
-        image: 'img/borscht.jpg',
-        alt: 'Миска борщу зі сметаною'
-    },
-    {
-        category: 'Другі страви',
-        name: 'Вареники з картоплею',
-        time: 60,
-        level: 'Легко',
-        rating: 4.7,
-        image: '',
-        alt: ''
-    },
-];
-
-let savedRecipes = [];
-
-try {
-    savedRecipes = JSON.parse(localStorage.getItem('userRecipes')) || [];
-} catch (error) {
-    savedRecipes = [];
-}
-
-recipes.unshift(...savedRecipes);
-
-
 const randomButton = document.querySelector('.banner__button');
 const bannerText = document.querySelector('.banner__subtitle');
 
@@ -92,11 +25,7 @@ const defaultTitle = 'Популярні рецепти';
 const linkDefaultText = 'Дивитися всі →';
 let showingAll = false;
 
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
+
 
 function resetLink() {
     showingAll = false;
@@ -122,7 +51,9 @@ function renderRecipes(list) {
                     ${imageHtml}
                     <div class="recipe-card__body">
                         <span class="recipe-card__category">${escapeHtml(recipe.category)}</span>
-                        <h3 class="recipe-card__title">${escapeHtml(recipe.name)}</h3>
+                         <h3 class="recipe-card__title">
+                                <a class="recipe-card__link" href="recipe.html?id=${recipe.id}">${escapeHtml(recipe.name)}</a>
+                            </h3>
                         <div class="recipe-card__meta">
                             <span>⏱ ${recipe.time} хв</span>
                             <span>👨‍🍳 ${escapeHtml(recipe.level)}</span>
@@ -220,13 +151,19 @@ recipeForm.addEventListener('submit', function (event) {
     const formData = new FormData(recipeForm);
 
     const newRecipe = {
+        
         category: formData.get('category'),
         name: formData.get('name').trim(),
         time: Number(formData.get('time')),
         level: formData.get('level'),
         rating: '–',
         image: '',
-        alt: ''
+        alt: '',
+        id: 'u' + Date.now(),
+        ingredients: [],
+        steps: [],
+        ingredients: linesToList(formData.get('ingredients')),
+        steps: linesToList(formData.get('steps'))
     };
 
     savedRecipes.unshift(newRecipe);
@@ -241,3 +178,5 @@ recipeForm.addEventListener('submit', function (event) {
     renderRecipes(recipes.slice(0, 3));
     document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
 });
+
+

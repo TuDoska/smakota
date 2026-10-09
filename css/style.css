@@ -304,7 +304,20 @@ a{
     border: 1px solid #EBE7E0;
     border-radius: 16px;
     overflow: hidden;
+    position: relative;
 }
+
+.recipe-card__link::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+
+}
+
+.recipe-card:hover{
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 .recipe-card__image {
     width: 100%;
     height: 270px;
@@ -422,7 +435,89 @@ a{
 }
 
 
+.recipe{
+     padding: 48px 0 64px;
+}
 
+.recipe__back{
+    display: inline-block;
+    margin-bottom: 24px;
+    font-weight: 500;
+     color: #E4572E;
+}
+
+.recipe__message{
+    color: #7D7A75;
+}
+
+.recipe-page__category{
+    font-size: 14px;
+    font-weight: 600;
+    color: #E4572E;
+}
+
+.recipe-page__title{
+    margin: 8px 0 16px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+
+.recipe-page__meta{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+    color:  #7D7A75;
+}
+
+.recipe__image{
+    display: block;
+    width: 100%;
+    height: 420px;
+    margin-bottom: 40px;
+    object-fit: cover;
+    border-radius: 16px;
+
+}
+
+.recipe__image--placeholder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 96px;
+    background-color:  #FAF6F1;
+}
+
+
+.recipe-page__columns{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+}
+
+.recipe-page__subtitle{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 900;
+
+}
+
+.recipe-page__ingredients{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+
+
+.recipe-page__steps{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 24px;
+    line-height: 1.6;
+}
 /*Наш підхід називається desktop-first: спершу зроблено для великого екрана (це твій макет), потім max-width «стискає» під менші. Дві точки зміни:
 
 1024px: планшет  1!!!!!
@@ -507,13 +602,28 @@ html {
 }
 
 .add-recipe__field input,
-.add-recipe__field select {
+.add-recipe__field select,
+.add-recipe__field textarea {
     padding: 12px 16px;
     font-family: inherit;
     font-size: 16px;
     background-color: #fff;
     border: 1px solid #E0DDD8;
     border-radius: 8px;
+}
+
+.add-recipe__field input:focus,
+.add-recipe__field select:focus,
+.add-recipe__field textarea:focus {
+    border-color: #E4572E;
+}
+
+.add-recipe__field textarea {
+    resize: vertical;
+}
+
+.add-recipe__field--wide {
+    grid-column: 1 / -1;
 }
 
 .add-recipe__field input:focus,
@@ -536,6 +646,8 @@ html {
 .add-recipe__button:hover {
     background-color: #C94420;
 }
+
+
 
 
 @media (max-width: 768px){
@@ -617,6 +729,19 @@ html {
 
     .footer__brand {
         grid-column: 1 / -1;
+    }
+
+    .recipe-page__columns{
+        grid-template-columns: 1fr;
+
+    }
+
+    .recipe__image{
+        height: 260px;
+    }
+
+    .recipe-page__title{
+        font-size: 30px;
     }
 }
 
