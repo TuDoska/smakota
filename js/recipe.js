@@ -38,6 +38,7 @@ if (!recipe) {
                 <span>👨‍🍳 ${escapeHtml(recipe.level)}</span>
                 <span>⭐ ${recipe.rating}</span>
             </div>
+            <button class="recipe-page__save" id="save-button" type="button"></button>
             ${imageHtml}
             <div class="recipe-page__columns">
                 <section>
@@ -51,4 +52,22 @@ if (!recipe) {
             </div>
         </article>
     `;
+    const saveButton = document.querySelector('#save-button');
+
+    function updateSaveButton() {
+        if (isFavorite(recipe.id)) {
+            saveButton.textContent = '★ Збережено';
+            saveButton.classList.add('recipe-page__save--active');
+        } else {
+            saveButton.textContent = '☆ Зберегти';
+            saveButton.classList.remove('recipe-page__save--active');
+        }
+    }
+
+    updateSaveButton();
+
+    saveButton.addEventListener('click', function () {
+        toggleFavorite(recipe.id);
+        updateSaveButton();
+    });
 }

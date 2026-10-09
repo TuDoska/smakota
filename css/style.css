@@ -518,6 +518,32 @@ a{
     padding-left: 24px;
     line-height: 1.6;
 }
+
+
+.recipe-page__save {
+    margin-bottom: 32px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #E4572E;
+    background-color: #fff;
+    border: 1px solid #E4572E;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.recipe-page__save:hover {
+    background-color: #FCEAE4;
+}
+
+.recipe-page__save--active {
+    color: #fff;
+    background-color: #E4572E;
+}
+
+.recipe-page__save--active:hover {
+    background-color: #C94420;
+}
 /*Наш підхід називається desktop-first: спершу зроблено для великого екрана (це твій макет), потім max-width «стискає» під менші. Дві точки зміни:
 
 1024px: планшет  1!!!!!

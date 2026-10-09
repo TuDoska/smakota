@@ -163,6 +163,35 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function getFavorites() {
+    try {
+        return JSON.parse(localStorage.getItem('favorites')) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function isFavorite(id) {
+    return getFavorites().includes(id);
+}
+
+function toggleFavorite(id) {
+    let favorites = getFavorites();
+
+    if (favorites.includes(id)) {
+        favorites = favorites.filter(function (item) {
+            return item !== id;
+        });
+    } else {
+        favorites.push(id);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+
+
+
 
 
 
