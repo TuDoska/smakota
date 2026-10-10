@@ -566,7 +566,85 @@ a{
 Як перевіряти: у Chrome натисни F12, потім Ctrl+Shift+M (режим пристрою). Можна перетягувати межі сторінки й бачити, як вона змінюється, або обрати iPhone зі списку. */
 
 
+.comments {
+    margin-top: 64px;
+}
 
+.comments__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 640px;
+    margin-bottom: 32px;
+}
+
+.comments__form input,
+.comments__form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #E0DDD8;
+    border-radius: 8px;
+}
+
+.comments__form input:focus,
+.comments__form textarea:focus {
+    border-color: #E4572E;
+}
+
+.comments__form textarea {
+    resize: vertical;
+}
+
+.comments__button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #E4572E;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.comments__button:hover {
+    background-color: #C94420;
+}
+
+.comments__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+}
+
+.comment {
+    padding: 16px 20px;
+    background-color: #FAF6F1;
+    border-radius: 12px;
+}
+
+.comment__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.comment__date {
+    font-size: 14px;
+    color: #7D7A75;
+}
+
+.comment__text {
+    line-height: 1.5;
+}
+
+.comments__empty {
+    color: #7D7A75;
+}
 
 
 @media (max-width: 1024px) {

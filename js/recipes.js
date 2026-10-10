@@ -191,6 +191,32 @@ function toggleFavorite(id) {
 
 
 
+function getComments(recipeId) {
+    try {
+        const all = JSON.parse(localStorage.getItem('comments')) || {};
+        return all[recipeId] || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function addComment(recipeId, comment) {
+    let all = {};
+
+    try {
+        all = JSON.parse(localStorage.getItem('comments')) || {};
+    } catch (error) {
+        all = {};
+    }
+
+    if (!all[recipeId]) {
+        all[recipeId] = [];
+    }
+
+    all[recipeId].push(comment);
+    localStorage.setItem('comments', JSON.stringify(all));
+}
+
 
 
 
