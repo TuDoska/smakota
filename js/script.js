@@ -1,3 +1,4 @@
+// ---------- Випадковий рецепт ----------
 const randomButton = document.querySelector('.banner__button');
 const bannerText = document.querySelector('.banner__subtitle');
 
@@ -18,23 +19,31 @@ randomButton.addEventListener('click', function (event) {
 });
 
 
+// ---------- Елементи сторінки ----------
 const popularList = document.querySelector('.popular__list');
 const popularTitle = document.querySelector('.popular__title');
 const popularLink = document.querySelector('.popular__link');
+const searchInput = document.querySelector('.hero__search');
+const searchForm = document.querySelector('.hero__form');
+const timeSelect = document.querySelector('#filter-time');
+const levelSelect = document.querySelector('#filter-level');
+const resetButton = document.querySelector('#filter-reset');
+const savedButton = document.querySelector('#saved-button');
+
 const defaultTitle = 'Популярні рецепти';
 const linkDefaultText = 'Дивитися всі →';
+
+
+// ---------- Стан ----------
 let showingAll = false;
+let selectedCategory = '';
+let onlySaved = false;
 
 
-
-function resetLink() {
-    showingAll = false;
-    popularLink.textContent = linkDefaultText;
-}
-
+// ---------- Малювання карток ----------
 function renderRecipes(list, emptyText) {
     if (list.length === 0) {
-        popularList.innerHTML = '<li class="popular__empty">' + (emptyText || 'Нічого не знайдено. Спробуйте інше слово.') + '</li>';
+        popularList.innerHTML = '<li class="popular__empty">' + (emptyText || 'Нічого не знайдено. Спробуйте змінити пошук або фільтри.') + '</li>';
         return;
     }
 
@@ -51,9 +60,9 @@ function renderRecipes(list, emptyText) {
                     ${imageHtml}
                     <div class="recipe-card__body">
                         <span class="recipe-card__category">${escapeHtml(recipe.category)}</span>
-                         <h3 class="recipe-card__title">
-                                <a class="recipe-card__link" href="recipe.html?id=${recipe.id}">${escapeHtml(recipe.name)}</a>
-                            </h3>
+                        <h3 class="recipe-card__title">
+                            <a class="recipe-card__link" href="recipe.html?id=${recipe.id}">${escapeHtml(recipe.name)}</a>
+                        </h3>
                         <div class="recipe-card__meta">
                             <span>⏱ ${recipe.time} хв</span>
                             <span>👨‍🍳 ${escapeHtml(recipe.level)}</span>
@@ -68,42 +77,96 @@ function renderRecipes(list, emptyText) {
     popularList.innerHTML = cardsHtml;
 }
 
-renderRecipes(recipes.slice(0, 3));
+
+// ---------- Допоміжні функції ----------
+function resetLink() {
+    showingAll = false;
+    popularLink.textContent = linkDefaultText;
+}
+
+function resetFilters() {
+    searchInput.value = '';
+    timeSelect.value = '0';
+    levelSelect.value = '';
+    selectedCategory = '';
+    onlySaved = false;
+    savedButton.classList.remove('popular__saved--active');
+}
+
+function scrollToRecipes() {
+    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+}
 
 
-const searchInput = document.querySelector('.hero__search');
-const searchForm = document.querySelector('.hero__form');
-
-function search() {
+// ---------- Головна функція: читає всі умови й малює результат ----------
+function applyFilters() {
     const query = searchInput.value.trim().toLowerCase();
-    resetLink();
+    const maxTime = Number(timeSelect.value);
+    const level = levelSelect.value;
+    const favorites = getFavorites();
 
-    if (query === '') {
+    const hasFilters = query !== '' || selectedCategory !== '' || maxTime !== 0 || level !== '' || onlySaved;
+
+    if (!hasFilters) {
         popularTitle.textContent = defaultTitle;
-        renderRecipes(recipes.slice(0, 3));
+        renderRecipes(showingAll ? recipes : recipes.slice(0, 3));
         return;
     }
 
-    const found = recipes.filter(function (recipe) {
-        const inName = recipe.name.toLowerCase().includes(query);
-        const inCategory = recipe.category.toLowerCase().includes(query);
+    resetLink();
 
-        return inName || inCategory;
+    const found = recipes.filter(function (recipe) {
+        const matchesQuery = query === ''
+            || recipe.name.toLowerCase().includes(query)
+            || recipe.category.toLowerCase().includes(query);
+        const matchesCategory = selectedCategory === '' || recipe.category === selectedCategory;
+        const matchesTime = maxTime === 0 || recipe.time <= maxTime;
+        const matchesLevel = level === '' || recipe.level === level;
+        const matchesSaved = !onlySaved || favorites.includes(recipe.id);
+
+        return matchesQuery && matchesCategory && matchesTime && matchesLevel && matchesSaved;
     });
 
-    popularTitle.textContent = 'Результати пошуку';
-    renderRecipes(found);
+    if (onlySaved) {
+        popularTitle.textContent = 'Збережені рецепти';
+    } else if (selectedCategory !== '') {
+        popularTitle.textContent = selectedCategory;
+    } else {
+        popularTitle.textContent = 'Результати пошуку';
+    }
+
+    const emptyText = (onlySaved && favorites.length === 0)
+        ? 'Ви ще нічого не зберегли. Відкрийте рецепт і натисніть «Зберегти».'
+        : undefined;
+
+    renderRecipes(found, emptyText);
 }
 
-searchInput.addEventListener('input', search);
+applyFilters();
+
+
+// ---------- Пошук ----------
+searchInput.addEventListener('input', applyFilters);
 
 searchForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    search();
-    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+    applyFilters();
+    scrollToRecipes();
 });
 
 
+// ---------- Фільтри ----------
+timeSelect.addEventListener('change', applyFilters);
+levelSelect.addEventListener('change', applyFilters);
+
+resetButton.addEventListener('click', function () {
+    resetFilters();
+    resetLink();
+    applyFilters();
+});
+
+
+// ---------- Категорії ----------
 const categoryCards = document.querySelectorAll('.category-card');
 
 categoryCards.forEach(function (card) {
@@ -112,36 +175,44 @@ categoryCards.forEach(function (card) {
 
         const categoryName = card.querySelector('.category-card__name').textContent;
 
-        const found = recipes.filter(function (recipe) {
-            return recipe.category === categoryName;
-        });
-
-        searchInput.value = '';
-        resetLink();
-        popularTitle.textContent = categoryName;
-        renderRecipes(found);
-        document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+        selectedCategory = (selectedCategory === categoryName) ? '' : categoryName;
+        applyFilters();
+        scrollToRecipes();
     });
 });
 
 
+// ---------- Збережені ----------
+savedButton.addEventListener('click', function () {
+    onlySaved = !onlySaved;
+    savedButton.classList.toggle('popular__saved--active', onlySaved);
+    applyFilters();
+    scrollToRecipes();
+});
+
+
+// ---------- Дивитися всі / Показати менше ----------
 popularLink.addEventListener('click', function (event) {
     event.preventDefault();
 
-    searchInput.value = '';
-    popularTitle.textContent = defaultTitle;
-
-    if (showingAll) {
-        renderRecipes(recipes.slice(0, 3));
-        popularLink.textContent = linkDefaultText;
-    } else {
-        renderRecipes(recipes);
-        popularLink.textContent = 'Показати менше ←';
-    }
-
+    resetFilters();
     showingAll = !showingAll;
+    popularLink.textContent = showingAll ? 'Показати менше ←' : linkDefaultText;
+    applyFilters();
 });
 
+
+// ---------- Форма додавання рецепта ----------
+function linesToList(text) {
+    return text
+        .split('\n')
+        .map(function (line) {
+            return line.trim();
+        })
+        .filter(function (line) {
+            return line !== '';
+        });
+}
 
 const recipeForm = document.querySelector('#recipe-form');
 
@@ -151,7 +222,6 @@ recipeForm.addEventListener('submit', function (event) {
     const formData = new FormData(recipeForm);
 
     const newRecipe = {
-        
         category: formData.get('category'),
         name: formData.get('name').trim(),
         time: Number(formData.get('time')),
@@ -160,8 +230,6 @@ recipeForm.addEventListener('submit', function (event) {
         image: '',
         alt: '',
         id: 'u' + Date.now(),
-        ingredients: [],
-        steps: [],
         ingredients: linesToList(formData.get('ingredients')),
         steps: linesToList(formData.get('steps'))
     };
@@ -172,26 +240,8 @@ recipeForm.addEventListener('submit', function (event) {
 
     recipeForm.reset();
 
-    searchInput.value = '';
+    resetFilters();
     resetLink();
-    popularTitle.textContent = defaultTitle;
-    renderRecipes(recipes.slice(0, 3));
-    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
-});
-
-
-const savedButton = document.querySelector('#saved-button');
-
-savedButton.addEventListener('click', function () {
-    const favorites = getFavorites();
-
-    const found = recipes.filter(function (recipe) {
-        return favorites.includes(recipe.id);
-    });
-
-    searchInput.value = '';
-    resetLink();
-    popularTitle.textContent = 'Збережені рецепти';
-    renderRecipes(found, 'Ви ще нічого не зберегли. Відкрийте рецепт і натисніть «Зберегти».');
-    document.querySelector('.popular').scrollIntoView({ behavior: 'smooth' });
+    applyFilters();
+    scrollToRecipes();
 });

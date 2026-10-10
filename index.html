@@ -190,12 +190,34 @@
                     </div>
                     </div>
 
+                        <div class="filters">
+                            <label class="filters__field">
+                                Час приготування
+                                <select id="filter-time">
+                                    <option value="0">Будь-який</option>
+                                    <option value="30">До 30 хв</option>
+                                    <option value="60">До 60 хв</option>
+                                    <option value="90">До 90 хв</option>
+                                </select>
+                            </label>
 
+                            <label class="filters__field">
+                                Складність
+                                <select id="filter-level">
+                                    <option value="">Будь-яка</option>
+                                    <option value="Легко">Легко</option>
+                                    <option value="Середньо">Середньо</option>
+                                    <option value="Складно">Складно</option>
+                                </select>
+                            </label>
 
-                <ul class="popular__list"></ul>
+                            <button class="filters__reset" id="filter-reset" type="button">Скинути фільтри</button>
+                        </div>
 
-            </div>
-        </section>
+                                        <ul class="popular__list"></ul>
+
+                                    </div>
+                                </section>
   
                                 <section class="add-recipe" id="add-recipe">
                         <div class="container">
